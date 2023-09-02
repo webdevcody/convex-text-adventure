@@ -19,14 +19,19 @@ export default function Main() {
       <div className="grid grid-cols-3 gap-8">
         {["warrior", "wizard", "archer"].map((character) => {
           return (
-            <img
+            <div
               key={character}
-              onClick={() => setSelectedCharacter(character)}
-              src={`/${character}.png`}
-              className={
-                selectedCharacter === character ? "border border-white" : ""
-              }
-            />
+              className="flex flex-col items-center gap-2 text-2xl"
+            >
+              <img
+                onClick={() => setSelectedCharacter(character)}
+                src={`/${character}.png`}
+                className={
+                  selectedCharacter === character ? "border border-white" : ""
+                }
+              />
+              {character}
+            </div>
           );
         })}
       </div>

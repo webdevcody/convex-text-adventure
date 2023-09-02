@@ -66,6 +66,8 @@ export const setupAdventureEntries = internalAction({
     - the final level has a chest filled with one steel sword which deals base damage of 2
 
     Given this scenario, please ask the player for their initial actions.
+
+    PLEASE MAKE SURE TO NEVER ROLL FOR THE PLAYER.  YOU SHOULD ALWAYS ASK THE PLAYER FOR HIS NEXT STEPS.
   `;
 
     const completion = await openai.chat.completions.create({

@@ -39,7 +39,9 @@ export const visualizeLatestEntries = internalAction({
           role: "user",
           content: `${previousEntriesCombined} 
           
-          Using the above adventure history, please describe the current scene so that I can use the description to draw a picture.`,
+          Using the above adventure history, please describe the current scene so that I can use the description to draw a picture.
+          
+          Please summerize using a single descriptive sentence.`,
         },
       ],
       model: "gpt-3.5-turbo",
@@ -52,9 +54,9 @@ export const visualizeLatestEntries = internalAction({
       {
         method: "POST",
         body: JSON.stringify({
-          prompt: response,
+          prompt: response + " illustration, dark, fantasy",
           n: 1,
-          size: "512x512",
+          size: "256x256",
         }),
         headers: {
           "Content-Type": "application/json",
@@ -64,6 +66,7 @@ export const visualizeLatestEntries = internalAction({
     );
 
     const imageResponse = await imageFetchResponse.json();
+    console.log("imageResponse", imageResponse);
     const imageUrl = imageResponse.data[0].url;
     const imageData = await fetch(imageUrl);
     const image = await imageData.blob();
