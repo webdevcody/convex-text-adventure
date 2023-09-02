@@ -107,7 +107,7 @@ export const generateInventoryIcon = internalAction({
       {
         method: "POST",
         body: JSON.stringify({
-          prompt: args.itemName,
+          prompt: args.itemName + ", black background",
           n: 1,
           size: "256x256",
         }),
@@ -119,10 +119,13 @@ export const generateInventoryIcon = internalAction({
     );
     const imageResponse = await imageFetchResponse.json();
     const imageUrl = imageResponse.data[0].url;
+    const response = await fetch(imageUrl);
+    const image = await response.blob();
+    const storageId = await ctx.storage.store(image);
 
     await ctx.runMutation(internal.inventory.storeItemImage, {
       itemName: args.itemName,
-      imageUrl,
+      imageUrl: (await ctx.storage.getUrl(storageId)) ?? "",
     });
   },
 });

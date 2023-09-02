@@ -1,9 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rubik_Burned, Chakra_Petch } from "next/font/google";
 import ConvexClientProvider from "./ConvexClientProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+export const font = Chakra_Petch({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-chakra",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.variable}>
         <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>

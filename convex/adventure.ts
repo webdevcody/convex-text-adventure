@@ -6,9 +6,12 @@ import { api, internal } from "./_generated/api";
 const openai = new OpenAI();
 
 export const createAdventure = mutation({
-  handler: async (ctx) => {
+  args: {
+    character: v.string(),
+  },
+  handler: async (ctx, args) => {
     const id = await ctx.db.insert("adventures", {
-      characterClass: "warrior",
+      characterClass: args.character,
     });
 
     await ctx.scheduler.runAfter(0, internal.adventure.setupAdventureEntries, {
